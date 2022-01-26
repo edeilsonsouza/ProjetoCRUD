@@ -1,5 +1,6 @@
 
 /**
+ * __________________________________________________________________
  * Projeto CRUD em JAVA, 
  * Para avaliação dos recrutadores do Projeto +PraTI
  *
@@ -35,7 +36,19 @@
  *      necessário cadastrar em banco de dados. Ou seja,
  *      quando encerrar a aplicação perde-se todo o 
  *      histórico.
+ * __________________________________________________________________
  * 
+ * Classe Principal
+ *
+ *      1) Método que inicializa o programa.
+ *      2) Apresenta o Menu com as opções do CRUD.
+ *             - Criar pessoa ou aluno
+ *             - Mostrar todas as pessoas e alunos criados
+ *               (Listar na tela)
+ *             - Atualizar dados de uma pessoa ou aluno
+ *             - Deletar uma pessoa ou aluno
+ *             - Encerrar programa
+ * __________________________________________________________________
  * 
  * @author (Edeilson Souza) 
  * @email (edeilsonsouza@hotmail.com)
@@ -46,11 +59,20 @@ public class Principal
 {
     public static void main(String args[])
     {
+        //Declaração e inicialização de variáveis de controle.
         String res = "1";
         int opt = 0;
-        while (res.equalsIgnoreCase("1")) 
+        // Rotina de repetição executada enquanto usuário não pedir para encerrar.
+        while (res.equalsIgnoreCase ("1")) 
         {
-            opt = EntradaSaida.receberInt("1: Cadastrar Item, 2: Listar Cadastro, 3: Atualizar Item, 4: Deletar Item");
+            // Usuário define qual ação executar.
+            opt = EntradaSaida.receberInt("1: Criar cadastro, 2: Mostrar cadastro, 3: Atualizar cadastro, 4: Deletar cadastro");
+            while (opt < 1 || opt > 4){
+                    // Enquanto opção inválida for informada,
+                    // solicita a informação de opção válida.
+                    opt = EntradaSaida.receberInt("1: Criar cadastro, 2: Mostrar cadastro, 3: Atualizar cadastro, 4: Deletar cadastro");
+                }
+            // Realiza a chamada do método que executa a ação escolhida.
             switch(opt) {
                 case 1:
                     Processamento.createCadastro();
@@ -64,12 +86,15 @@ public class Principal
                 case 4:
                     Processamento.deleteCadastro();
                     break;
-                default:
-                    EntradaSaida.mostrarTexto("Opção inválida, use uma opção de 1 a 4.");
             }
-            res = EntradaSaida.receberString("Continuar? 1 - para Sim, 2 - para Não.");
+            // Solicita a informação se o usuário quer continuar ou encerrar o programa.
+            res = EntradaSaida.receberString("Continuar ou Encerrar o programa? Digite 1 - para Continuar, 2 - para Encerrar.");
+            while (!res.equalsIgnoreCase ("1") && !res.equalsIgnoreCase ("2")){
+                    // Enquanto opção inválida for informada,
+                    // solicita a informação de opção válida.
+                    res = EntradaSaida.receberString("Continuar ou Encerrar o programa? Digite 1 - para Continuar, 2 - para Encerrar.");
+            }
         }
     }
-    
 }
 
